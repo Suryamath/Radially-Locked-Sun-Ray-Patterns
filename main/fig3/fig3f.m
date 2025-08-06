@@ -1,0 +1,19 @@
+Q=[40:10:200];
+
+hold on
+delta_cr=[5.51 4.49 4.15 4.05, 3.45 3.4 3.21 3.06, 2.9 2.8 2.72 2.6 2.55, 2.49 2.47 2.45 2.43];
+
+
+plot(Q, delta_cr, ...
+    'MarkerFaceColor', [0.8196, 0.1569, 0.3451], ...
+    'MarkerSize', 12, ...
+    'Marker', 'pentagram', ...
+    'LineWidth', 1, ...
+    'Color', [0, 0, 1])
+box(gca,'on');
+
+ylabel('$\delta_{cr}$','FontSize',20,'Interpreter','latex');
+xlabel('$Q$','FontSize',20,'Interpreter','latex');
+% Set the remaining axes properties
+set(gca,'FontSize',18,'TickLength',[0.03 0.025],'XMinorTick','off',...
+    'YMinorTick','off');
