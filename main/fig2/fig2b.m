@@ -3,7 +3,7 @@ close all
 clc
 
 %%
-Q = [160];                                 % Parameter values for set 1
+Q = [80];                                 % Parameter values for set 1
 delta = [3 4 7 10];                            % Parameter values for set 2
 Qsize = length(Q);                           % Number of iterations for parameter set 1
 deltasize = length(delta);                   % Number of iterations for parameter set 2
@@ -39,6 +39,21 @@ time(k)= find(tvec == tp(k));
 end
 
 %% different par A or  B
+
+for i = 1        % index for Q
+    for j = 1:par2    % index for delta
+        % Load the .mat file
+        loaded = load(sprintf('dataA_Q%ddel%d.mat',Q(i), delta(j)));
+
+        % Assuming the loaded variable name is always the same as the file: e.g., 'dataA_Q160del5'
+        varname = sprintf('dataA_Q%d_del%d', Q(i),delta(j));
+
+        % Extract the actual matrix using dynamic field access
+        dataA{j, i} = loaded.(varname);
+    end
+end
+
+
 for i = 1        %index for Q
     for j = 1:par2    %index for delta
         for k=1
@@ -87,10 +102,10 @@ box off;
 % Set the viewing angle to directly above the plot
 view(2);
 
-title(sprintf('$\\delta = %d, Q=160$', delta(j)), ...
+title(sprintf('$\\delta = %d, Q=%d$',Q(i), delta(j)), ...
     'Interpreter', 'latex', ...
     'HorizontalAlignment', 'center', ...
-    'FontSize', 14);  % change for a different Q
+    'FontSize', 14); 
 
     end
 end
@@ -113,4 +128,4 @@ set(c,'Position',[0.954002981429003 0.286915149058335 0.00903384107823679 0.3996
     'TickLength',0.025,...
     'FontWeight','bold',...
     'FontSize',12);
-exportgraphics(gcf,'Q160image.jpg','Resolution',600) % change for a different Q
+exportgraphics(gcf,'Q80image.jpg','Resolution',600) % change for a different Q
